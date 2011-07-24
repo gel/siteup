@@ -1,0 +1,9 @@
+Thanks for joining SiteUp!
+
+To complete your registration, go to the following address:
+
+  localhost:8000/activate-account/{{ activation_key }}
+
+Thank you!
+
+The SiteUp team.

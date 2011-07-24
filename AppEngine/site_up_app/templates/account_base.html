@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load url from future %}
+{% block navigation %}
+<div class="art-nav">
+	<div class="l"></div>
+	<div class="r"></div>
+	{% if user.is_authenticated %}
+		<ul class="art-menu">
+			<li><a href="{% url 'home' %}" class="{% ifequal request.get_full_path '/home/' %} active{% endifequal %}"><span class="l"></span><span class="r"></span><span class="t">Home</span></a></li>
+			<li><a href="{% url 'search' %}" class="{% ifequal request.get_full_path '/search/' %} active{% endifequal %}"><span class="l"></span><span class="r"></span><span class="t">Search</span></a></li>
+			<li><a href="#" class="{% ifequal request.get_full_path '/account/' %} active{% endifequal %}"><span class="l"></span><span class="r"></span><span class="t">Account</span></a>
+				<ul>
+					<li><a href="{% url 'account-Buy_searches' %}">Buy Searches</a></li>
+					<li><a href="{% url 'account-Payment_setting' %}">Payment Settings</a></li>
+					<li><a href="{% url 'account-Account_details' %}">Account Details</a></li>
+				</ul>
+			</li>
+			<li><a href="{% url 'info' %}" class="{% ifequal request.get_full_path '/info/' %} active{% endifequal %}"><span class="l"></span><span class="r"></span><span class="t">About</span></a></li>
+			<li class="right"><a href="{% url 'logout' %}" class="{% ifequal request.get_full_path '/logout/' %} active{% endifequal %}"><span class="l"></span><span class="r"></span><span class="t">Logout</span></a></li>		
+			<li class="right"><a href="{% url 'faq' %}" class="{% ifequal request.get_full_path '/faq/' %} active{% endifequal %}"><span class="l"></span><span class="r"></span><span class="t">Help</span></a></li>
+		</ul>
+	{% endif %}
+</div>
+{% endblock %}

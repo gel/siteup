@@ -1,0 +1,87 @@
+{% extends 'account_base.html' %}
+{% load url from future %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="art-sidebar1">
+                        <div class="art-Block">
+                            <div class="art-Block-body">
+                                <div class="art-BlockHeader">
+                                    <div class="art-header-tag-icon">
+                                    	{% if user.is_authenticated %}
+                                        <div class="t">Hello!</div>
+                                        {% else %}
+                                        <div class="t">Sign in</div>
+                                        {% endif %}
+                                    </div>
+                                </div><div class="art-BlockContent">
+                                    <div class="art-BlockContent-tl"></div>
+                                    <div class="art-BlockContent-tr"></div>
+                                    <div class="art-BlockContent-bl"></div>
+                                    <div class="art-BlockContent-br"></div>
+                                    <div class="art-BlockContent-tc"></div>
+                                    <div class="art-BlockContent-bc"></div>
+                                    <div class="art-BlockContent-cl"></div>
+                                    <div class="art-BlockContent-cr"></div>
+                                    <div class="art-BlockContent-cc"></div>
+                                    <div class="art-BlockContent-body">
+                                        <div>
+                                       	{% if user.is_authenticated %}
+                                       	<h2>Welcome back {{ user.username }}!</h2>
+                                        {% else %}
+                                        <form id="loginform" method="POST" action="{% url 'login' %}">
+											  {% csrf_token %}
+											    {% if form.errors %}
+											    <p style="color:red">
+											      Your username and password didn't match. Please try again.
+											    </p>
+											    {% endif %}
+											    Username: {{ form.username }}<br />
+											    Password: {{ form.password }}<br />
+											    <input class="art-button" type="submit" name="search" value="Login"/>
+											    <input type="hidden" name="next" value="{{ next }}" />
+										<br /><br />
+										<a href="{% url 'sign-up' %}">Sign Up!</a>	
+                                        </form>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <div class="art-Post">
+                            <div class="art-Post-body">
+                        <div class="art-Post-inner">
+                            
+                            <div class="art-PostContent">
+                                <h1>Does your site fail to attract visitors? </h1>
+								<h1>Are your competitors stealing your customers online?</h1>  
+                                   
+								<h3>Research shows that your site's search results in search engines(such as Google or Bing) is the single most important factor in attracting web traffic.<br /> 
+								We can help you become the #1 search result for your business.</h3>
+								
+								<img src="{{ STATIC_URL }}images/searchresults.png"  style="float: left" />
+								
+								<span class="art-button-wrapper">
+                                		<span class="l"> </span>
+                                		<span class="r"> </span>
+                                		<a class="art-button" href="{% url 'info' %}">Tell me more...</a>
+								</span><br />
+								<span class="art-button-wrapper">
+                                		<span class="l"> </span>
+                                		<span class="r"> </span>
+                                		<a class="art-button" href="{% url 'faq' %}">FAQ</a>
+                                		
+								</span>
+                            </div>
+                            <div class="cleared"></div>
+							
+                        </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+{% endblock %}

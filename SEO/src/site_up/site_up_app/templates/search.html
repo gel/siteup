@@ -1,0 +1,119 @@
+{% extends 'account_base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+
+<div id="search_content">
+<h1 class="title">New Search</h1>
+	<form id="remaining_searches" method="get" action=".">
+		<h4>Hey {{ user.username }}, you got {{ remaining_searches }} searches left!</h4>
+	</form>
+	<p id="simple-text">Write as many phrases as you can think of that describe your site, separated by commas, and click Search.</p>
+	<div class="art-contentLayout-search">
+		<div class="art-sidebar1-search">
+			<div class="art-Block">
+				<div class="art-Block-body">
+					<div class="art-BlockHeader">
+						<div class="art-header-tag-icon">
+							<div class="t">Search Settings</div>
+						</div>
+					</div>
+						<div class="art-BlockContent">
+						<div class="art-BlockContent-tl"></div>
+						<div class="art-BlockContent-tr"></div>
+						<div class="art-BlockContent-bl"></div>
+						<div class="art-BlockContent-br"></div>
+						<div class="art-BlockContent-tc"></div>
+						<div class="art-BlockContent-bc"></div>
+						<div class="art-BlockContent-cl"></div>
+						<div class="art-BlockContent-cr"></div>
+						<div class="art-BlockContent-cc"></div>
+						<div class="art-BlockContent-body">
+							<div style="overflow: hidden;">
+							<form id="search" method="post" action="." style="width: 400px; float: left">
+							{% csrf_token %}
+							<h4>Site Description (separated with commas): </h4>
+							<textarea id="searchTextarea" rows="10" cols="40" name="query">{% if search %} {{ search.query }} {% endif %}</textarea>
+							<br /><br />
+							<ul>
+								<li> 
+									<label class="desc" for="SearchQuality"> 
+										Search Quality
+									</label> 								
+									<select id="SearchQuality" name="SearchQuality" tabindex="3" > 
+										<option value="Very Fast"> 
+											Very Fast (1 minute)
+										</option>
+										<option value="Fast"> 
+											Fast (3 minutes)
+										</option>
+										<option value="Normal"> 
+											Normal (10 minutes)
+										</option>
+										<option value="Good"> 
+											Good (0.5 hour)
+										</option>
+										<option value="Very Good"> 
+											Very Good (1 hour)
+										</option>
+									</select> 
+								</li>
+								<li> 
+									<label class="desc" for="SearchIterations"> 
+										Search Iterations
+									</label> 								
+									<select id="SearchIterations" name="SearchIterations" tabindex="3" > 
+										<option value="1"> 
+											1
+										</option>
+										<option value="2"> 
+											2
+										</option>
+										<option value="3"> 
+											3
+										</option>
+										<option value="4"> 
+											4
+										</option>
+										<option value="5"> 
+											5
+										</option>
+									</select> 
+								</li>
+							</ul> 
+							<br />
+							<span class="art-button-wrapper">
+								<span class="l"> </span>
+								<span class="r"> </span>
+								<input class="art-button" type="submit" value="Search" onClick="if (document.getElementById('searchTextarea').value == '') return false; document.getElementById('waiting_opaque').style.display = 'block'; document.getElementById('waiting').style.display = 'block'; document.getElementById('waiting_opaque').style.width = screen.width; document.getElementById('waiting_opaque').style.height = screen.height; stopwatch();" />
+							</span>
+							<span class="art-button-wrapper">
+								<span class="l"> </span>
+								<span class="r"> </span>
+								<input class="art-button" type="submit" name="search" value="Clear" onClick="document.getElementById('searchTextarea').value = ''; document.getElementById('resultTextarea').value = ''; return false;"/>
+							</span>
+							</form>
+							
+							<form id="result" method="get" action="." style="float: right">
+							<h4>Result: </h4>
+							<textarea id="resultTextarea" rows="10" cols="40" name="result" readonly="1">{% if search %}{{ search.result }}{% endif %}</textarea>
+							<br /><br />
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	</div>
+	<div id="waiting_opaque">
+	</div>
+	<div id="waiting">
+		<br /><br /><br /><br /><br />
+		<img src="{{ STATIC_URL }}images/ajax-loader.gif" />
+		<br />
+		<div id="timer" style="text:center"></div>
+		<h2>Searching for keywords, Please wait...</h2>
+	</div>
+{% endblock %}

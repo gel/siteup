@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<div class="art-contentLayout-register">
+                    <div class="art-sidebar1-register">
+                        <div class="art-Block">
+                            <div class="art-Block-body">
+                                <div class="art-BlockHeader">
+                                    <div class="art-header-tag-icon">
+                                        <div class="t">Registration</div>
+                                    </div>
+                                </div><div class="art-BlockContent">
+                                    <div class="art-BlockContent-tl"></div>
+                                    <div class="art-BlockContent-tr"></div>
+                                    <div class="art-BlockContent-bl"></div>
+                                    <div class="art-BlockContent-br"></div>
+                                    <div class="art-BlockContent-tc"></div>
+                                    <div class="art-BlockContent-bc"></div>
+                                    <div class="art-BlockContent-cl"></div>
+                                    <div class="art-BlockContent-cr"></div>
+                                    <div class="art-BlockContent-cc"></div>
+                                    <div class="art-BlockContent-body">
+                                    	<form action="." method="post">
+										    <table id="registration_table">
+										      {% csrf_token %}
+										      {{ form.as_table }}
+										    </table>
+										    <center style="margin-bottom: 30px;">
+										      <input class="art-button" type="submit" value="Submit"/>
+										    </center>
+										  </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+					<img src="{{ STATIC_URL }}images/business.jpg" alt="pic" style="float: right; margin-left: 3px; margin-top: 70px" />
+                </div>
+{% endblock %}
