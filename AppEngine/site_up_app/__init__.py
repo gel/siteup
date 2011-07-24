@@ -1,1 +1,0 @@
-'''SiteUp's main app.'''
