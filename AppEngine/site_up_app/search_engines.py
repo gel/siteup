@@ -2,6 +2,37 @@
 Created on Apr 10, 2011
 
 @author: dlemel
+
+		res = dict()
+        web_queries = list()
+        if self.cache and ignore_urls:
+            for q in queries:
+                if q in self.cache:
+                    res[q] = self.cache[q]
+                else:
+                    web_queries.append(q)
+        else:
+            web_queries = queries
+        
+        d = {}
+        tasks = set(web_queries[:])   
+        while tasks:
+            tp = ThreadPool(self.thread_num)
+            for q in tasks:
+                tp.add_task(self._search, q)
+            d_items = tp.wait_completion().items()
+            d.update([(item[0][1][0],item[1]) for item in d_items])
+            tasks -= set(d.keys())
+    
+        for q in web_queries:
+            if ignore_urls:
+                res[q] = d[q][0]
+            else:
+                res[q] = d[q]
+            if self.cache:
+                self.cache[q] = d[q][0]
+        return res
+
 '''
 import urllib
 try:
@@ -39,25 +70,13 @@ class SearchEngine:
                     web_queries.append(q)
         else:
             web_queries = queries
-        
+
         d = {}
-        tasks = set(web_queries[:])   
-        while tasks:
-            tp = ThreadPool(self.thread_num)
-            for q in tasks:
-                tp.add_task(self._search, q)
-            d_items = tp.wait_completion().items()
-            d.update([(item[0][1][0],item[1]) for item in d_items])
-            tasks -= set(d.keys())
-    
-        for q in web_queries:
-            if ignore_urls:
-                res[q] = d[q][0]
-            else:
-                res[q] = d[q]
-            if self.cache:
-                self.cache[q] = d[q][0]
-        return res
+        tasks = set(web_queries[:])
+        for q in tasks:
+			item = self._search(q)
+			d[q] = item
+        return d
             
     def _search(self, query):
         ''' Search the string query in a search engine, return a tuple of total results and a url list '''

@@ -174,55 +174,52 @@ class KeyWordsStealerWithFilter(Dictionary):
     def steal_keywords(self, urls, num):
         l = set([])
         for url in urls:
+            self.start_web_time()
             try:
-                self.start_web_time()
                 response = urllib.urlopen(url).read()
                 self.end_web_time()
                 keys = re.search(r'<meta[^<>]*?name="keywords"[^<>]*?>', response, re.DOTALL | re.MULTILINE)
                 if keys:
                     content = re.search(r'content=".*?"', keys.group(), re.DOTALL | re.MULTILINE)
                     str = content.group().replace('\n', '').replace('content=','').replace('"', '')
-                    tmp_l = re.sub(r', *', ',', str).lower().split(',')  
+                    tmp_l = re.sub(r', *', ',', str).lower().split(',')
                     l = set(tmp_l + list(l))
-                             
-                    if len(l) >= num:
+                    if len(l) >= num:                        
                         l = set(self.remove_duplicates(list(l)))
                         if len(l) >= num:
                             break
             except:
-                connection_error()
-            
-        return self.remove_duplicates(list(l))
-    
-    def lookup(self, queries):
-        self.start_time()
-        words_per_query = int(self.max_urls_to_query / float(len(queries)))
-        res = []
-        for query in queries:
-            l = []
-            i = 0
-            to_search = query
-            while len(l) < words_per_query:
-                self.start_web_time()
-                (_, urls) = self.se.search([to_search])[to_search]
                 self.end_web_time()
-                
-                l += self.steal_keywords(urls, words_per_query - len(l))
-                
-                if len(l) < words_per_query: 
-                    l += self.dictionary.lookup([to_search])
-                    
-                if i >= len(l):
-                    break    
-                to_search = l[i]
-                i += 1
-                
-            if len(l) > words_per_query:
-                l = l[:words_per_query]
-            res += l  
-        
-        # subtract lists
-        res = list(set(res).difference(queries))
-        res = self.remove_duplicates(res)
-        self.end_time()
-        return res
+        l = self.remove_duplicates(list(l))
+        return l
+
+    def lookup(self, queries):
+		res = []
+		self.start_time()
+		words_per_query = int(self.max_urls_to_query / float(len(queries)))
+		for query in queries:
+			l = []
+			i = 0
+			to_search = query
+			while len(l) < words_per_query:
+				self.start_web_time()				
+				(_, urls) = self.se.search([to_search])[to_search]
+				self.end_web_time()
+				l += self.steal_keywords(urls, words_per_query - len(l))
+				break
+				if len(l) < words_per_query: 
+					l += self.dictionary.lookup([to_search])
+				if i >= len(l):
+					break    
+				to_search = l[i]
+				i += 1
+				
+			if len(l) > words_per_query:
+				l = l[:words_per_query]
+			res += l
+		# subtract lists
+		res = list(set(res).difference(queries))
+		res = self.remove_duplicates(res)
+		self.end_time()
+		return res
+		
