@@ -16,12 +16,20 @@ class SearchView(django.views.generic.TemplateView):
         profile = request.user.get_profile()
         if profile.n_purchased_searches <= 0:
             return http.HttpResponseRedirect(reverse('not-enough-searches'))        
-        profile.n_purchased_searches -= 1
-        profile.save()
         
-        query = request.POST['query']
+        query = request.POST['query'].strip()
         search_quality = request.POST['SearchQuality']
         search_iterations = int(request.POST['SearchIterations'])
+        
+        context = self.get_context_data(**kwargs)
+        
+        if (len(query.split(',')) > 4):
+            errorMsg = "Can't search more than 5 phrases in the POC version."
+            searchVerification = models.Search(user=request.user, query=query, result=errorMsg, type=search_quality, iterations=search_iterations)
+            context['remaining_searches'] = profile.n_purchased_searches
+            context['search'] = searchVerification
+            return self.render_to_response(context)
+
         '''
         switch statement in python
         '''
@@ -37,7 +45,9 @@ class SearchView(django.views.generic.TemplateView):
         search = models.Search(user=request.user, query=query, result=result, type=search_quality, iterations=search_iterations)
         search.save()
 
-        context = self.get_context_data(**kwargs)
+        profile.n_purchased_searches -= 1
+        profile.save()
+        
         context['remaining_searches'] = profile.n_purchased_searches
         context['search'] = search
         return self.render_to_response(context)
@@ -64,7 +74,7 @@ class HomeView(django.views.generic.TemplateView):
         context_data['existing_searches'] = existing_searches
         context_data['index_searches'] = range(1,1+len(existing_searches))
         return context_data
-		
+
 class BuyView(django.views.generic.TemplateView):
     template_name = 'account-Buy_searches.html'
     

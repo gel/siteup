@@ -3,7 +3,6 @@
 import django.db.models
 import django.contrib.auth.models
 
-
 class UserProfile(django.db.models.Model):
     '''Profile for a `SiteUp` user.'''
     
@@ -11,6 +10,7 @@ class UserProfile(django.db.models.Model):
         ('Paypal', 'Paypal'),
         ('Credit card', 'Credit card'),
     )
+    
     preferred_payment_method = django.db.models.CharField(
         choices=PAYMENT_METHOD_CHOICES,
         max_length=30,
@@ -21,7 +21,6 @@ class UserProfile(django.db.models.Model):
         django.contrib.auth.models.User,
         related_name='user_profile',
     )
-    
     
     n_purchased_searches = django.db.models.PositiveIntegerField(
         default=10,

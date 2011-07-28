@@ -15,7 +15,7 @@
 					</form>
 					<p id="simple-text">
 						Write phrases that describe your site 
-						and click search (<b>Limit: 5 phrases</b>).
+						and click search (<b>Limit: 4 phrases</b>).
 					</p>
 					<div class="art-BlockHeader">
 						<div class="art-header-tag-icon">
@@ -37,7 +37,7 @@
 								<form id="search" method="post" action="." style="width: 400px; float: left">
 									{% csrf_token %}
 									<h4>Site Description (separated with commas): </h4>
-									<textarea id="searchTextarea" rows="10" cols="40" name="query">{% if search %} {{ search.query }} {% endif %}</textarea>
+									<textarea id="searchTextarea" rows="10" cols="40" name="query">{% if search %}{{ search.query }}{% endif %}</textarea>
 									<br /><br />
 									<ul>
 										<li> 
