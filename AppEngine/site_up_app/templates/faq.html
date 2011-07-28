@@ -1,60 +1,58 @@
-{% extends 'account_base.html' %}
+{% extends 'header.html' %}
 {% block title %}FAQ{% endblock %}
 {% block content %}
 <div class="art-sidebar1">
-                        <div class="art-Block">
-                            <div class="art-Block-body">
-                                <div class="art-BlockHeader">
-                                    <div class="art-header-tag-icon">
-                                        <div class="t">Table Of Contents</div>
-                                    </div>
-                                </div><div class="art-BlockContent">
-                                    <div class="art-BlockContent-tl"></div>
-                                    <div class="art-BlockContent-tr"></div>
-                                    <div class="art-BlockContent-bl"></div>
-                                    <div class="art-BlockContent-br"></div>
-                                    <div class="art-BlockContent-tc"></div>
-                                    <div class="art-BlockContent-bc"></div>
-                                    <div class="art-BlockContent-cl"></div>
-                                    <div class="art-BlockContent-cr"></div>
-                                    <div class="art-BlockContent-cc"></div>
-                                    <div class="art-BlockContent-body">
-                                    	<h2>Table of contents</h2>
-                                    	<ul>
-      										<li><a href="#howdoesthisworks">How does this work?</a></li>
-      										<li><a href="#termsofservice">What are the TOS(Terms of Service)?</a></li>
-                                    		<li><a href="#idea">How did this project start?</a></li>
-                                    		<li><a href="#contact">How can I contact you?</a></li>
-                                    	</ul>
-                                    	<br />
-                                    	
-                                    	<a class="art-button" onClick="javascript:history.go(-1)">Back</a> <!--This should take us back to the previous area-->
-                                    	
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="art-content">
-                        <div class="art-Post">
-                            <div class="art-Post-body">
-                        <div class="art-Post-inner">						
-                            <div class="art-PostContent">
-								<h2 id="howdoesthisworks">How does this work?</h2>
-								<h4>Once you provide us the basic words that describe your business our service uses highly advanced computer algorithms to generate relevant keywords. Eventually, the best selection of words are chosen and showed to the user. Injecting those keywords into your site will increase your traffic.</h4><br />
-								<h2 id="termsofservice">What are the TOS(Terms of Service)?</h2>
-								<h4>This service is a free POC(Proof of Concept). Therefore only basic keywords are returned and they are not being analyzed for context. If you're interested in the idea and want to test the full features/service please contact me.</h4><br />
-								<h2 id="idea">How did this project start?</h2>
-								<h4>I started working on my idea with 7 members for my final project in the Technion's CS faculty. I would like to thank all of them: Daniel Lemel, Eli Kfir, Amir Rachum, Avi Vitner, Nikita Kiryanov, Gil Raytan and Shahar Meir.</h4><br />
-								<h2 id="contact">How can I contact you?</h2>
-								<h4>My name is Gal Goldman, you can reach me me via LinkedIn.</h4>
-							</div>
-                            <div class="cleared"></div>
-							
-                        </div>
-                        
-                            </div>
-                        </div>
-                    </div>
-                    
+	<div class="art-Block">
+    	<div class="art-Block-body">
+        	<div class="art-BlockHeader">
+            	<div class="art-header-tag-icon">
+					<div class="t">Table Of Contents</div>
+				</div>
+			</div>
+			<div class="art-BlockContent">
+				<div class="art-BlockContent-tl"></div>
+				<div class="art-BlockContent-tr"></div>
+                <div class="art-BlockContent-bl"></div>
+                <div class="art-BlockContent-br"></div>
+                <div class="art-BlockContent-tc"></div>
+                <div class="art-BlockContent-bc"></div>
+                <div class="art-BlockContent-cl"></div>
+                <div class="art-BlockContent-cr"></div>
+                <div class="art-BlockContent-cc"></div>
+                <div class="art-BlockContent-body">
+                	<h2>Table of contents</h2>
+                    <ul>
+						<li><a href="#howdoesthisworks">How does this work?</a></li>
+	      				<li><a href="#termsofservice">What are the TOS(Terms of Service)?</a></li>
+	                    <li><a href="#idea">How did this project start?</a></li>
+	                    <li><a href="#contact">How can I contact you?</a></li>
+					</ul>
+					<br />
+                    <a class="art-button" onClick="javascript:history.go(-1)">Back</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="art-content">
+	<div class="art-Post">
+		<div class="art-Post-body">
+			<div class="art-Post-inner">						
+            	<div class="art-PostContent">
+					<h2 id="howdoesthisworks">How does this work?</h2>
+					<h4>Once you provide us the basic words that describe your business our service uses highly advanced computer algorithms to generate relevant keywords. Eventually, the best selection of words are chosen and showed to the user. Injecting those keywords into your site will increase your traffic.</h4><br />
+					<h2 id="termsofservice">What are the TOS(Terms of Service)?</h2>
+					<h4>This service is a free POC(Proof of Concept). Therefore only basic keywords are returned and they are not being analyzed for context. If you're interested in the idea and want to test the full features/service please contact me.</h4><br />
+					<h2 id="idea">How did this project start?</h2>
+					<h4>I started working on my idea with 7 members for my final project in the Technion's CS faculty. I would like to thank all of them: Daniel Lemel, Eli Kfir, Amir Rachum, Avi Vitner, Nikita Kiryanov, Gil Raytan and Shahar Meir.</h4><br />
+					<h2 id="contact">How can I contact you?</h2>
+					<h4>My name is Gal Goldman, you can reach me via LinkedIn.</h4>
+				</div>
+				<div class="cleared">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>                    
 {% endblock %}
